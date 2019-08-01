@@ -1,0 +1,18 @@
+{
+  "name": "async-email-personal",
+  "version": "1.0.0",
+  "description": "Send emails asynchronously personalized to each of them",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Srivastav Nanduri",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.5",
+    "email-templates": "^2.0.0",
+    "handlebars": "^4.1.2",
+    "nodemailer": "^6.3.0"
+  }
+}
