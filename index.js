@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer'),
-    const creds = require('./creds.js'),
+    creds = require('./creds.js'),
     transporter = nodemailer.createTransport({
         pool: true,
         service: 'gmail',
