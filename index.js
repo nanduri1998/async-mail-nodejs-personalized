@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer'),
     creds = require('./creds.js'),
+    userimport = require('./users.json'),
     transporter = nodemailer.createTransport({
         pool: true,
         service: 'gmail',
@@ -13,14 +14,7 @@ const nodemailer = require('nodemailer'),
     path = require('path'),
     Promise = require('bluebird');
 
-let users = [
-    {
-        name: 'NAME_OF_PERSON',
-        email: 'EMAIL_OF_PERSON',
-        filename: 'FILENAME_OF ATTACHMENT_IF_ANY', //Delete this and next line in case of no attachments
-        path: 'path/to/file/with/extension'
-    }
-]
+let users = userimport.data;
 
 function sendEmail(obj) {
     return transporter.sendMail(obj);
@@ -46,15 +40,16 @@ loadTemplate('updates', users).then((results) => {
     return Promise.all(results.map((result) => {
         sendEmail({
             to: result.context.email,
-            from: 'COMPANY_OR_PERSON_NAME',
+            from: 'Innovation Center <innovationcenter_hyd@gitam.in>',
             subject: result.email.subject,
             html: result.email.html,
             text: result.email.text,
-            //Uncomment in case of attachements
-            // attachments: {
-            //     filename: result.context.filename,
-            //     path: result.context.path
-            // }
+            // Uncomment in case of attachements
+            attachments: [
+                {
+                    path: 'files\/'+result.context.email+'.jpg'
+                }
+            ]
         });
     }))
 }).then(() => {
